@@ -1,4 +1,3 @@
-import { useState, useEffect } from 'react';
 import { useQuery } from 'react-query';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
@@ -57,7 +56,7 @@ const P = styled.p`
     margin-top: 5px;
 `;
 
-interface CoinProps {
+interface ICoin {
     id: string;
     name: string;
     symbol: string;
@@ -68,7 +67,7 @@ interface CoinProps {
 }
 
 function Coins() {
-    const { isLoading, data } = useQuery<CoinProps[]>('allCoins', fetchCoins);
+    const { isLoading, data } = useQuery<ICoin[]>('allCoins', fetchCoins);
     return (
         <Container>
             <Header>
