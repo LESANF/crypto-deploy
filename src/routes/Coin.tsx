@@ -152,8 +152,7 @@ function Coin() {
     const { coinId } = useParams() as RouteParams;
     const priceMatch = useMatch(`${coinId}/price`);
     const chartMatch = useMatch(`${coinId}/chart`);
-
-    const state: RouteState = useLocation().state;
+    const state = useLocation().state as RouteState;
 
     const { isLoading: isInfoLoading, data: coinInfo } = useQuery<IInfo>([coinId, 'coinInfo'], () =>
         fetchCoinInfo(coinId)
@@ -162,7 +161,8 @@ function Coin() {
         fetchCoinPrice(coinId)
     );
 
-    const loading = isInfoLoading && isPriceLoading;
+    const loading = isInfoLoading || isPriceLoading;
+    console.log(loading);
     // const [loading, setLoading] = useState(true);
     // const [price, setPrice] = useState<Iprice>();
     // const [info, setInfo] = useState<IInfo>();
