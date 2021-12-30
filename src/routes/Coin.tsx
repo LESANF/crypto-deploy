@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
+import { useQuery } from 'react-query';
 import { useLocation, useParams, Route, Routes, Link, useMatch } from 'react-router-dom';
 import styled from 'styled-components';
+import { fetchCoinInfo, fetchCoinPrice } from '../api';
 import Chart from './Chart';
 import Price from './Price';
 
@@ -75,6 +77,10 @@ interface RouteState {
     name: string;
 }
 
+interface RouteParams {
+    coinId: string;
+}
+
 interface ITags {
     coin_counter: number;
     ico_counter: number;
@@ -108,7 +114,7 @@ interface IInfo {
     last_data_at: string;
 }
 
-interface Iprice {
+interface IPrice {
     id: string;
     name: string;
     symbol: string;
@@ -143,28 +149,38 @@ interface Iprice {
 }
 
 function Coin() {
-    const [loading, setLoading] = useState(true);
-    const [price, setPrice] = useState<Iprice>();
-    const [info, setInfo] = useState<IInfo>();
-    const { coinId } = useParams();
+    const { coinId } = useParams() as RouteParams;
     const priceMatch = useMatch(`${coinId}/price`);
     const chartMatch = useMatch(`${coinId}/chart`);
+
     const state: RouteState = useLocation().state;
 
-    useEffect(() => {
-        (async () => {
-            const infoData = await (await fetch(`https://api.coinpaprika.com/v1/coins/${coinId}`)).json();
-            const priceData = await (await fetch(`https://api.coinpaprika.com/v1/tickers/${coinId}`)).json();
-            setInfo(infoData);
-            setPrice(priceData);
-            setLoading(false);
-        })();
-    }, [coinId]);
+    const { isLoading: isInfoLoading, data: coinInfo } = useQuery<IInfo>([coinId, 'coinInfo'], () =>
+        fetchCoinInfo(coinId)
+    );
+    const { isLoading: isPriceLoading, data: priceInfo } = useQuery<IPrice>([coinId, 'priceInfo'], () =>
+        fetchCoinPrice(coinId)
+    );
+
+    const loading = isInfoLoading && isPriceLoading;
+    // const [loading, setLoading] = useState(true);
+    // const [price, setPrice] = useState<Iprice>();
+    // const [info, setInfo] = useState<IInfo>();
+
+    // useEffect(() => {
+    //     (async () => {
+    //         const infoData = await (await fetch(`https://api.coinpaprika.com/v1/coins/${coinId}`)).json();
+    //         const priceData = await (await fetch(`https://api.coinpaprika.com/v1/tickers/${coinId}`)).json();
+    //         setInfo(infoData);
+    //         setPrice(priceData);
+    //         setLoading(false);
+    //     })();
+    // }, [coinId]);
 
     return (
         <Container>
             <Header>
-                <Title>{state?.name ? state.name : loading ? 'Loading...' : info?.name}</Title>
+                <Title>{state?.name ? state.name : loading ? 'Loading...' : coinInfo?.name}</Title>
             </Header>
             {loading ? (
                 <Loader>Loading...</Loader>
@@ -173,26 +189,26 @@ function Coin() {
                     <Overview>
                         <OverviewItem>
                             <span>Rank:</span>
-                            <span>{info?.rank}</span>
+                            <span>{coinInfo?.rank}</span>
                         </OverviewItem>
                         <OverviewItem>
                             <span>Symbol:</span>
-                            <span>${info?.symbol}</span>
+                            <span>${coinInfo?.symbol}</span>
                         </OverviewItem>
                         <OverviewItem>
                             <span>Open Source:</span>
-                            <span>{info?.open_source ? 'Yes' : 'No'}</span>
+                            <span>{coinInfo?.open_source ? 'Yes' : 'No'}</span>
                         </OverviewItem>
                     </Overview>
-                    <Description>{info?.description}</Description>
+                    <Description>{coinInfo?.description}</Description>
                     <Overview>
                         <OverviewItem>
                             <span>Total Suply:</span>
-                            <span>{price?.total_supply}</span>
+                            <span>{priceInfo?.total_supply}</span>
                         </OverviewItem>
                         <OverviewItem>
                             <span>Max Supply:</span>
-                            <span>{price?.max_supply}</span>
+                            <span>{priceInfo?.max_supply}</span>
                         </OverviewItem>
                     </Overview>
                     <Tabs>
