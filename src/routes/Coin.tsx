@@ -162,20 +162,6 @@ function Coin() {
     );
 
     const loading = isInfoLoading || isPriceLoading;
-    console.log(loading);
-    // const [loading, setLoading] = useState(true);
-    // const [price, setPrice] = useState<Iprice>();
-    // const [info, setInfo] = useState<IInfo>();
-
-    // useEffect(() => {
-    //     (async () => {
-    //         const infoData = await (await fetch(`https://api.coinpaprika.com/v1/coins/${coinId}`)).json();
-    //         const priceData = await (await fetch(`https://api.coinpaprika.com/v1/tickers/${coinId}`)).json();
-    //         setInfo(infoData);
-    //         setPrice(priceData);
-    //         setLoading(false);
-    //     })();
-    // }, [coinId]);
 
     return (
         <Container>
