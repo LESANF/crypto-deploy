@@ -5,7 +5,7 @@ import { fetchOHLCvalue } from '../api';
 import CandleChart from './CandleChart';
 import LineChart from './LineChart';
 
-const RadioTitle = styled.span`
+const RadioLabel = styled.label`
     margin-right: 5px;
 `;
 const RadioSelChart = styled.input.attrs({ type: 'radio', name: 'chartBtn' })``;
@@ -37,22 +37,14 @@ function Chart({ coinId }: ChartProps) {
 
     return (
         <div>
-            <RadioSelChart
-                //type="radio"
-                value="candle"
-                //name="chartBtn"
-                checked={chartSel === 'candle'}
-                onChange={chgChart}
-            />
-            <RadioTitle>Candle</RadioTitle>
-            <RadioSelChart
-                //type="radio"
-                value="line"
-                //name="chartBtn"
-                checked={chartSel === 'line'}
-                onChange={chgChart}
-            />
-            <RadioTitle>Line</RadioTitle>
+            <RadioLabel>
+                <RadioSelChart value="candle" checked={chartSel === 'candle'} onChange={chgChart} />
+                Candle
+            </RadioLabel>
+            <RadioLabel>
+                <RadioSelChart value="line" checked={chartSel === 'line'} onChange={chgChart} />
+                Line
+            </RadioLabel>
             {chartSel === 'candle' ? <CandleChart coinId={coinId} /> : <LineChart coinId={coinId} />}
         </div>
     );

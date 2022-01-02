@@ -58,7 +58,7 @@ function CandleChart({ coinId }: ChartProps) {
     ];
 
     return (
-        <>
+        <div>
             {isLoading ? (
                 'Chart is Loading...'
             ) : (
@@ -69,7 +69,7 @@ function CandleChart({ coinId }: ChartProps) {
                     height={350}
                 />
             )}
-        </>
+        </div>
     );
 }
 

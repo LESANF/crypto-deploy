@@ -51,7 +51,9 @@ function LineChart({ coinId }: ChartProps) {
     ];
 
     return (
-        <>{isLoading ? 'Chart is Loading' : <ApexCharts options={apexLineOpt} series={apexLineSeries} />}</>
+        <div>
+            {isLoading ? 'Chart is Loading' : <ApexCharts options={apexLineOpt} series={apexLineSeries} />}
+        </div>
     );
 }
 
