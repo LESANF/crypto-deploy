@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { useQuery } from 'react-query';
-import { fetchOHLCvalue } from '../api';
 import CandleChart from './CandleChart';
 import LineChart from './LineChart';
 
