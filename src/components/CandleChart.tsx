@@ -1,10 +1,12 @@
 import ApexCharts from 'react-apexcharts';
 import { useQuery } from 'react-query';
 import { fetchOHLCvalue } from '../api';
-import { ChartProps, IOHLCvalue } from './Chart';
+import { ChartProps, IOHLCvalue } from '../routes/Chart';
 
 function CandleChart({ coinId }: ChartProps) {
-    const { isLoading, data } = useQuery<IOHLCvalue[]>(['ohlcv', 'chart'], () => fetchOHLCvalue(coinId));
+    const { isLoading, data } = useQuery<IOHLCvalue[]>(['ohlcv', 'chart'], () => fetchOHLCvalue(coinId), {
+        refetchInterval: 5000,
+    });
     const apexCandleOpt: object = {
         theme: {
             mode: 'dark',
@@ -49,7 +51,7 @@ function CandleChart({ coinId }: ChartProps) {
     };
     const apexCandleSeries: object[] = [
         {
-            name: 'candle',
+            name: 'Candle',
             data: data?.map((ele) => ({
                 x: ele.time_close.split('T')[0],
                 y: [ele.open, ele.high, ele.low, ele.close].map((ele) => ele.toFixed(2)),

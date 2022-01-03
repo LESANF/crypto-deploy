@@ -1,10 +1,12 @@
 import ApexCharts from 'react-apexcharts';
 import { useQuery } from 'react-query';
 import { fetchOHLCvalue } from '../api';
-import { ChartProps, IOHLCvalue } from './Chart';
+import { ChartProps, IOHLCvalue } from '../routes/Chart';
 
 function LineChart({ coinId }: ChartProps) {
-    const { isLoading, data } = useQuery<IOHLCvalue[]>(['ohlcv', 'line'], () => fetchOHLCvalue(coinId));
+    const { isLoading, data } = useQuery<IOHLCvalue[]>(['ohlcv', 'line'], () => fetchOHLCvalue(coinId), {
+        refetchInterval: 5000,
+    });
     const apexLineOpt: object = {
         theme: {
             mode: 'dark',
@@ -38,9 +40,9 @@ function LineChart({ coinId }: ChartProps) {
         },
         colors: ['#0fbcf9'],
         tooltip: {
-            // y: {
-            //   formatter: (value) => `$${value.toFixed(2)}`,
-            // },
+            y: {
+                formatter: (value: number) => `$${value.toFixed(2)}`,
+            },
         },
     };
     const apexLineSeries: object[] = [

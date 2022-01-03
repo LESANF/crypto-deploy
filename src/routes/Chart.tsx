@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import CandleChart from './CandleChart';
-import LineChart from './LineChart';
+import CandleChart from '../components/CandleChart';
+import LineChart from '../components/LineChart';
 
 const RadioLabel = styled.label`
     margin-right: 5px;
