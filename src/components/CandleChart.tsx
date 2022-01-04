@@ -3,13 +3,13 @@ import { useQuery } from 'react-query';
 import { fetchOHLCvalue } from '../api';
 import { ChartProps, IOHLCvalue } from '../routes/Chart';
 
-function CandleChart({ coinId }: ChartProps) {
+function CandleChart({ coinId, toggle }: ChartProps) {
     const { isLoading, data } = useQuery<IOHLCvalue[]>(['ohlcv', 'chart'], () => fetchOHLCvalue(coinId), {
         refetchInterval: 5000,
     });
     const apexCandleOpt: object = {
         theme: {
-            mode: 'dark',
+            mode: toggle ? 'dark' : 'light',
         },
         chart: {
             background: 'transparent',

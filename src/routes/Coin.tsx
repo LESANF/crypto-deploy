@@ -148,7 +148,11 @@ interface IPrice {
     };
 }
 
-function Coin() {
+interface ICoinProps {
+    toggle: boolean;
+}
+
+function Coin({ toggle }: ICoinProps) {
     const { coinId } = useParams() as RouteParams;
     const priceMatch = useMatch(`${coinId}/price`);
     const chartMatch = useMatch(`${coinId}/chart`);
@@ -216,7 +220,7 @@ function Coin() {
                     </Tabs>
                     <Routes>
                         <Route path="price" element={<Price />} />
-                        <Route path="chart" element={<Chart coinId={coinId} />} />
+                        <Route path="chart" element={<Chart coinId={coinId} toggle={toggle} />} />
                     </Routes>
                 </>
             )}

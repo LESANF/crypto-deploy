@@ -3,13 +3,13 @@ import { useQuery } from 'react-query';
 import { fetchOHLCvalue } from '../api';
 import { ChartProps, IOHLCvalue } from '../routes/Chart';
 
-function LineChart({ coinId }: ChartProps) {
+function LineChart({ coinId, toggle }: ChartProps) {
     const { isLoading, data } = useQuery<IOHLCvalue[]>(['ohlcv', 'line'], () => fetchOHLCvalue(coinId), {
         refetchInterval: 5000,
     });
     const apexLineOpt: object = {
         theme: {
-            mode: 'dark',
+            mode: toggle ? 'dark' : 'light',
         },
         chart: {
             height: 300,

@@ -68,7 +68,11 @@ interface ICoin {
     type: string;
 }
 
-function Coins() {
+interface ICoinsProps {
+    chgTheme: () => void;
+}
+
+function Coins({ chgTheme }: ICoinsProps) {
     const { isLoading, data } = useQuery<ICoin[]>('allCoins', fetchCoins);
 
     return (
@@ -80,6 +84,7 @@ function Coins() {
             </HelmetProvider>
             <Header>
                 <Title>코인</Title>
+                <button onClick={chgTheme}>Dark Mode</button>
             </Header>
             {isLoading ? (
                 <Loader>로딩 중...</Loader>
