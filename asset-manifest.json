@@ -1,0 +1,17 @@
+{
+  "files": {
+    "main.js": "/crypto-deploy/static/js/main.38e7f5dc.chunk.js",
+    "main.js.map": "/crypto-deploy/static/js/main.38e7f5dc.chunk.js.map",
+    "runtime-main.js": "/crypto-deploy/static/js/runtime-main.245e7fb7.js",
+    "runtime-main.js.map": "/crypto-deploy/static/js/runtime-main.245e7fb7.js.map",
+    "static/js/2.22f4a86d.chunk.js": "/crypto-deploy/static/js/2.22f4a86d.chunk.js",
+    "static/js/2.22f4a86d.chunk.js.map": "/crypto-deploy/static/js/2.22f4a86d.chunk.js.map",
+    "index.html": "/crypto-deploy/index.html",
+    "static/js/2.22f4a86d.chunk.js.LICENSE.txt": "/crypto-deploy/static/js/2.22f4a86d.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.245e7fb7.js",
+    "static/js/2.22f4a86d.chunk.js",
+    "static/js/main.38e7f5dc.chunk.js"
+  ]
+}
