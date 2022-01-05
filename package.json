@@ -1,6 +1,6 @@
 {
     "name": "crypto-tracker",
-    "homepage": "https://lesanf.github.io/Crypto-Tracker/",
+    "homepage": "https://lesanf.github.io/crypto-deploy/",
     "version": "0.1.0",
     "private": true,
     "dependencies": {
