@@ -8,12 +8,12 @@ interface IRouterProps {
     toggle: boolean;
 }
 
-function Router({ chgTheme, toggle }: IRouterProps) {
+function Router() {
     return (
         <BrowserRouter>
             <Routes>
-                <Route path="/" element={<Coins chgTheme={chgTheme} />} />
-                <Route path="/:coinId/*" element={<Coin toggle={toggle} />} />
+                <Route path="/" element={<Coins />} />
+                <Route path="/:coinId/*" element={<Coin />} />
             </Routes>
         </BrowserRouter>
     );

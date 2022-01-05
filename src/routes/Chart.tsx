@@ -21,10 +21,9 @@ export interface IOHLCvalue {
 
 export interface ChartProps {
     coinId: string;
-    toggle: boolean;
 }
 
-function Chart({ coinId, toggle }: ChartProps) {
+function Chart({ coinId }: ChartProps) {
     const [chartSel, setChartSel] = useState('candle');
 
     const chgChart = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -44,11 +43,7 @@ function Chart({ coinId, toggle }: ChartProps) {
                 <RadioSelChart value="line" checked={chartSel === 'line'} onChange={chgChart} />
                 Line
             </RadioLabel>
-            {chartSel === 'candle' ? (
-                <CandleChart coinId={coinId} toggle={toggle} />
-            ) : (
-                <LineChart coinId={coinId} toggle={toggle} />
-            )}
+            {chartSel === 'candle' ? <CandleChart coinId={coinId} /> : <LineChart coinId={coinId} />}
         </div>
     );
 }

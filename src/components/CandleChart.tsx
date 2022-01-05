@@ -1,15 +1,19 @@
 import ApexCharts from 'react-apexcharts';
 import { useQuery } from 'react-query';
+import { useRecoilValue } from 'recoil';
 import { fetchOHLCvalue } from '../api';
+import { isDarkMode } from '../atom';
 import { ChartProps, IOHLCvalue } from '../routes/Chart';
 
-function CandleChart({ coinId, toggle }: ChartProps) {
+function CandleChart({ coinId }: ChartProps) {
     const { isLoading, data } = useQuery<IOHLCvalue[]>(['ohlcv', 'chart'], () => fetchOHLCvalue(coinId), {
         refetchInterval: 5000,
     });
+
+    const isDark = useRecoilValue(isDarkMode);
     const apexCandleOpt: object = {
         theme: {
-            mode: toggle ? 'dark' : 'light',
+            mode: isDark ? 'dark' : 'light',
         },
         chart: {
             background: 'transparent',

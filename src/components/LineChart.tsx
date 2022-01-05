@@ -1,15 +1,19 @@
 import ApexCharts from 'react-apexcharts';
 import { useQuery } from 'react-query';
+import { useRecoilValue } from 'recoil';
 import { fetchOHLCvalue } from '../api';
+import { isDarkMode } from '../atom';
 import { ChartProps, IOHLCvalue } from '../routes/Chart';
 
-function LineChart({ coinId, toggle }: ChartProps) {
+function LineChart({ coinId }: ChartProps) {
     const { isLoading, data } = useQuery<IOHLCvalue[]>(['ohlcv', 'line'], () => fetchOHLCvalue(coinId), {
         refetchInterval: 5000,
     });
+
+    const isDark = useRecoilValue(isDarkMode);
     const apexLineOpt: object = {
         theme: {
-            mode: toggle ? 'dark' : 'light',
+            mode: isDark ? 'dark' : 'light',
         },
         chart: {
             height: 300,

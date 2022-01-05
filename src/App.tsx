@@ -4,6 +4,8 @@ import { createGlobalStyle } from 'styled-components';
 import { ReactQueryDevtools } from 'react-query/devtools';
 import { ThemeProvider } from 'styled-components';
 import { lightTheme, darkTheme } from './theme';
+import { useRecoilValue } from 'recoil';
+import { isDarkMode } from './atom';
 
 const GlobalStyle = createGlobalStyle`
   @import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400&display=swap');
@@ -74,13 +76,13 @@ const GlobalStyle = createGlobalStyle`
 `;
 
 function App() {
-    const [toggle, setToggle] = useState(false);
-    const chgTheme = () => setToggle((current: boolean) => !current);
+    const isDark = useRecoilValue(isDarkMode);
+
     return (
         <>
-            <ThemeProvider theme={toggle ? darkTheme : lightTheme}>
+            <ThemeProvider theme={isDark ? darkTheme : lightTheme}>
                 <GlobalStyle />
-                <Router chgTheme={chgTheme} toggle={toggle} />
+                <Router />
                 <ReactQueryDevtools />
             </ThemeProvider>
         </>
