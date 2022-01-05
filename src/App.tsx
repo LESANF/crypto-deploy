@@ -1,4 +1,3 @@
-import React, { useState } from 'react';
 import Router from './Router';
 import { createGlobalStyle } from 'styled-components';
 import { ReactQueryDevtools } from 'react-query/devtools';

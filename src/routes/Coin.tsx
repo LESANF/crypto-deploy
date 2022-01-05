@@ -148,10 +148,6 @@ interface IPrice {
     };
 }
 
-interface ICoinProps {
-    toggle: boolean;
-}
-
 function Coin() {
     const { coinId } = useParams() as RouteParams;
     const priceMatch = useMatch(`${coinId}/price`);

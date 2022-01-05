@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { Helmet, HelmetProvider } from 'react-helmet-async';
 import { fetchCoins } from '../api';
+import { useSetRecoilState } from 'recoil';
+import { isDarkMode } from '../atom';
 
 const Container = styled.div`
     padding: 0 20px;
@@ -68,12 +70,10 @@ interface ICoin {
     type: string;
 }
 
-interface ICoinsProps {
-    chgTheme: () => void;
-}
-
 function Coins() {
     const { isLoading, data } = useQuery<ICoin[]>('allCoins', fetchCoins);
+    const isDarkModeSet = useSetRecoilState(isDarkMode);
+    const chgTheme = () => isDarkModeSet((prev) => !prev);
 
     return (
         <Container>
@@ -84,7 +84,7 @@ function Coins() {
             </HelmetProvider>
             <Header>
                 <Title>코인</Title>
-                <button>Dark Mode</button>
+                <button onClick={chgTheme}>Dark Mode</button>
             </Header>
             {isLoading ? (
                 <Loader>로딩 중...</Loader>

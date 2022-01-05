@@ -3,11 +3,6 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Coin from './routes/Coin';
 import Coins from './routes/Coins';
 
-interface IRouterProps {
-    chgTheme: () => void;
-    toggle: boolean;
-}
-
 function Router() {
     return (
         <BrowserRouter>
