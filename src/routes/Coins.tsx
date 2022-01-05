@@ -3,8 +3,6 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { Helmet, HelmetProvider } from 'react-helmet-async';
 import { fetchCoins } from '../api';
-import { useRecoilValue } from 'recoil';
-import { isDarkMode, testAtom } from '../atom';
 
 const Container = styled.div`
     padding: 0 20px;
